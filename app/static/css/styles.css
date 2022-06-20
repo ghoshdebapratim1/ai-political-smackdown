@@ -41,7 +41,7 @@
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-primary-rgb: 29, 128, 159;
+  --bs-primary-rgb: 97, 69, 122;
   --bs-secondary-rgb: 236, 184, 7;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
@@ -3030,8 +3030,8 @@ textarea.form-control-lg {
 
 .btn-primary {
   color: #fff;
-  background-color: #1D809F;
-  border-color: #1D809F;
+  background-color: #61457a;
+  border-color: #61457a;
 }
 .btn-primary:hover {
   color: #fff;
@@ -7360,11 +7360,11 @@ textarea.form-control-lg {
 }
 
 .mb-1 {
-  margin-bottom: 0.25rem !important;
+  margin-bottom: 15.5rem !important;
 }
 
 .mb-2 {
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 11rem !important;
 }
 
 .mb-3 {
@@ -7716,7 +7716,7 @@ textarea.form-control-lg {
 /* rtl:end:remove */
 .text-primary {
   --bs-text-opacity: 1;
-  color: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
+  color: rgba(0,0,0, var(--bs-text-opacity)) !important;
 }
 
 .text-secondary {
@@ -11476,7 +11476,7 @@ footer.footer .social-link:hover {
   height: auto;
   padding-top: 8rem;
   padding-bottom: 8rem;
-  background: url("../img/donkey_vs_elephant.jpg") no-repeat center center;;
+  background: url("../img/Seesaw.png") no-repeat center center;;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
