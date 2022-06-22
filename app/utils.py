@@ -34,3 +34,10 @@ def and_syntax(alist):
         return alist
     else:
         return
+    
+def stringMinus (largerString,smallerString):
+    x=largerString.split()
+    y=smallerString.split()
+
+    z=set(x)^set(y)
+    return(' '.join(z))

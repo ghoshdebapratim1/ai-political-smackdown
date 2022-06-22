@@ -19,12 +19,13 @@ from flask import Flask, request, redirect, url_for, render_template, session
 from utils import get_base_url
 # import stuff for our models
 from aitextgen import aitextgen
+import nltk as nk
+nltk.download('punkt')
 
 # load up a model from memory. Note you may not need all of these options.
-# ai = aitextgen(model_folder="model/",
-#                tokenizer_file="model/aitextgen.tokenizer.json", to_gpu=False)
-
-ai = aitextgen(model="distilgpt2", to_gpu=False)
+ai_cons = aitextgen(model_folder="model-cons", to_gpu = False)
+ai_lib = aitextgen(model_folder="liberal_model", to_gpu = False)
+#ai = aitextgen(model="distilgpt2", to_gpu=False)
 
 # setup the webserver
 # port may need to be changed if there are multiple flask servers running on same server
@@ -41,7 +42,8 @@ else:
 app.secret_key = os.urandom(64)
 
 # set up the routes and logic for the webserver
-
+# list of liberal and coservative bot responses
+responses = []
 
 @app.route(f'{base_url}')
 def home():
@@ -68,6 +70,7 @@ def generate_text():
     view function that will return json response for generated text. 
     """
 
+
     prompt = request.form['prompt']
     if prompt is not None:
         generated = ai.generate(
@@ -92,7 +95,7 @@ def generate_text():
 
 if __name__ == '__main__':
     # IMPORTANT: change url to the site where you are editing this file.
-    website_url = 'cocalc3.ai-camp.dev'
+    website_url = 'coding.ai-camp.dev'
 
     print(f'Try to open\n\n    https://{website_url}' + base_url + '\n\n')
     app.run(host='0.0.0.0', port=port, debug=True)
