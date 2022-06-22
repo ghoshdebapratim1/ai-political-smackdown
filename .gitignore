@@ -27,8 +27,8 @@ MANIFEST
 
 
 #Large Folders
-app/model/
-app/aitextgen/
+app/model
+app/aitextgen
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
