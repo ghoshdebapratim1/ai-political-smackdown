@@ -13,17 +13,17 @@
 
 # import basics
 import os
-
+from utils import stringMinus
 # import stuff for our web server
 from flask import Flask, request, redirect, url_for, render_template, session
 from utils import get_base_url
 # import stuff for our models
 from aitextgen import aitextgen
 import nltk as nk
-nltk.download('punkt')
+#nk.download('punkt')
 
 # load up a model from memory. Note you may not need all of these options.
-ai_cons = aitextgen(model_folder="model-cons", to_gpu = False)
+ai_cons = aitextgen(model_folder="model_cons", to_gpu = False)
 ai_lib = aitextgen(model_folder="liberal_model", to_gpu = False)
 #ai = aitextgen(model="distilgpt2", to_gpu=False)
 
@@ -64,28 +64,64 @@ def results():
         return render_template('Write-your-story-with-AI.html', generated=None)
 
 
-@app.route(f'{base_url}/generate_text/', methods=["POST"])
-def generate_text():
-    """
-    view function that will return json response for generated text. 
-    """
-
-
-    prompt = request.form['prompt']
+def generate_text_lib(prompt):
+    
+    #prompt = input("Input some text for the liberal bot to respond to")
     if prompt is not None:
-        generated = ai.generate(
-            n=1,
-            batch_size=3,
-            prompt=str(prompt),
-            max_length=300,
-            temperature=0.9,
-            return_as_list=True
-        )
+        generated = ai_lib.generate(n=1, prompt=str(prompt), max_length=200, temperature=0.7, return_as_list=True, repetition_penalty = 1.5)
+        generated = generated[0]
+        generated = nk.sent_tokenize(generated)
+        generated = "".join(generated[:2])
+#         print("Liberal:" + str(generated))
+    #responses.append("Liberal:" + str(generated))
+    return generated
 
-    data = {'generated_ls': generated}
-    session['data'] = generated[0]
-    return redirect(url_for('results'))
+def generate_text_cons(prompt):
+#     prompt = input("Input some text for the conservartive bot to respond to")
+    
+    if prompt is not None:
+        generated = ai_cons.generate(n=1, prompt=str(prompt), max_length=200, temperature=0.7, return_as_list=True, repetition_penalty = 1.5)
+        generated = generated[0]
+        generated = nk.sent_tokenize(generated)
+        generated = "".join(generated[:2])
+#         print("Conservative:" + str(generated))
+    # adds generated response to list
+    #responses.append("Conservative:" + str(generated))
+    return generated
 
+
+def conservative_response(input):
+    
+    
+    gen_cons = ai_cons.generate(n=1, prompt=str(input), max_length=200, temperature=0.7, return_as_list=True, repetition_penalty = 1.5)
+        #gen_cons = nk.sent_tokenize(gen_cons[0])
+    gen_cons=gen_cons[0]
+    gen_cons=gen_cons[len(input):].strip()
+    output=gen_cons
+        #output = stringMinus(gen_cons[0], input)
+    generated_cons = nk.sent_tokenize(output)
+    generated_cons = "".join(generated_cons[:2])
+#     print("Conservative:" + generated_cons)
+   # responses.append("Conservative:" + generated_cons)
+    return generated_cons
+  # print("Conservative:" + generated[0])
+
+def liberal_response(input):
+
+    gen_lib = ai_lib.generate(n=1, prompt=str(input), max_length=200, temperature=0.7, return_as_list=True, repetition_penalty = 1.5)
+    gen_lib=gen_lib[0]
+    gen_lib=gen_lib[len(input):].strip()
+    output=gen_lib
+ 
+        #output = stringMinus(gen_lib[0], input)
+    generated_lib = nk.sent_tokenize(output)
+    generated_lib = "".join(generated_lib[:2])
+    #responses.append("Liberal:" + generated_lib)
+    return generated_lib
+
+
+
+# print("Conservative:" + generated[0])
 # define additional routes here
 # for example:
 # @app.route(f'{base_url}/team_members')
@@ -93,9 +129,41 @@ def generate_text():
 #     return render_template('team_members.html') # would need to actually make this page
 
 
+
+
+@app.route(f'{base_url}/generate_text/', methods=["POST"])
+
+def generate_text():
+    prompt = request.form['prompt']
+    opinion= request.form['opinion']
+    result=[]
+    #responses=""
+    if opinion == 'liberal':
+        x = generate_text_lib(prompt)
+        result.append('Liberal : '+x+'<br><br>')
+        for i in range(2):
+            z = conservative_response(x)
+            result.append('Conservative : '+z+'<br><br>')
+            x = liberal_response(z)
+            result.append('Liberal : '+x+'<br><br>')
+    elif opinion == 'conservative':
+        z = generate_text_cons(prompt)
+        result.append('Conservative : '+z+'<br><br>')
+        for i in range(2):
+            x = liberal_response(z)
+            result.append('Liberal : '+x+'<br><br>')
+            z = conservative_response(x)
+            result.append('Conservative : '+z+'<br><br>')
+    #reponses = "".join(str(x) for x in responses)
+    responses =" ".join(result)
+    session['data'] = responses
+    return redirect(url_for('results'))
+    
+
+
 if __name__ == '__main__':
     # IMPORTANT: change url to the site where you are editing this file.
-    website_url = 'coding.ai-camp.dev'
+    website_url = 'cocalc3.ai-camp.dev'
 
     print(f'Try to open\n\n    https://{website_url}' + base_url + '\n\n')
     app.run(host='0.0.0.0', port=port, debug=True)
