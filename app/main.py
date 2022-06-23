@@ -68,7 +68,7 @@ def generate_text_lib(prompt):
     
     #prompt = input("Input some text for the liberal bot to respond to")
     if prompt is not None:
-        generated = ai_lib.generate(n=1, prompt=str(prompt), max_length=200, temperature=0.7, return_as_list=True, repetition_penalty = 1.5)
+        generated = ai_lib.generate(n=1, prompt=str(prompt), max_length=100, temperature=1, return_as_list=True, repetition_penalty = 1.5)
         generated = generated[0]
         generated = nk.sent_tokenize(generated)
         generated = "".join(generated[:2])
@@ -80,7 +80,7 @@ def generate_text_cons(prompt):
 #     prompt = input("Input some text for the conservartive bot to respond to")
     
     if prompt is not None:
-        generated = ai_cons.generate(n=1, prompt=str(prompt), max_length=200, temperature=0.7, return_as_list=True, repetition_penalty = 1.5)
+        generated = ai_cons.generate(n=1, prompt=str(prompt), max_length=100, temperature=1, return_as_list=True, repetition_penalty = 1.5)
         generated = generated[0]
         generated = nk.sent_tokenize(generated)
         generated = "".join(generated[:2])
@@ -93,7 +93,7 @@ def generate_text_cons(prompt):
 def conservative_response(input):
     
     
-    gen_cons = ai_cons.generate(n=1, prompt=str(input), max_length=200, temperature=0.7, return_as_list=True, repetition_penalty = 1.5)
+    gen_cons = ai_cons.generate(n=1, prompt=str(input), max_length=100, temperature=1, return_as_list=True, repetition_penalty = 1.5)
         #gen_cons = nk.sent_tokenize(gen_cons[0])
     gen_cons=gen_cons[0]
     gen_cons=gen_cons[len(input):].strip()
@@ -108,7 +108,7 @@ def conservative_response(input):
 
 def liberal_response(input):
 
-    gen_lib = ai_lib.generate(n=1, prompt=str(input), max_length=200, temperature=0.7, return_as_list=True, repetition_penalty = 1.5)
+    gen_lib = ai_lib.generate(n=1, prompt=str(input), max_length=100, temperature=1, return_as_list=True, repetition_penalty = 1.5)
     gen_lib=gen_lib[0]
     gen_lib=gen_lib[len(input):].strip()
     output=gen_lib

@@ -1421,6 +1421,11 @@ progress {
     flex: 0 0 auto;
     width: 100%;
   }
+  .col-lg-13 {
+    flex: 0 0 auto;
+    width: 41.66666667%;
+    color: #fff;
+  }
 
   .offset-lg-0 {
     margin-left: 0;
