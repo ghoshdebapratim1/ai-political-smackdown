@@ -42,7 +42,7 @@
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
   --bs-primary-rgb: 97, 69, 122;
-  --bs-secondary-rgb: 194, 20, 8;
+  --bs-secondary-rgb: /*194, 20, 8;*/0, 174, 243;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 236, 184, 7;
@@ -1423,10 +1423,11 @@ progress {
   }
   .col-lg-13 {
     flex: 0 0 auto;
-    width: 41.66666667%;
-    color: #fff;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 0.25rem;
+    padding-right: 6%
   }
-
   .offset-lg-0 {
     margin-left: 0;
   }
@@ -1474,7 +1475,6 @@ progress {
   .offset-lg-11 {
     margin-left: 91.66666667%;
   }
-
   .g-lg-0,
 .gx-lg-0 {
     --bs-gutter-x: 0;
@@ -11367,7 +11367,7 @@ html {
 .sidebar-nav li a:hover {
   text-decoration: none;
   color: #fff;
-  background: rgba(255, 255, 255, 0.2);
+  background: /*rgba(0, 174, 243, 1); */rgba(255,255,255,0.2);
 }
 
 .sidebar-nav li a:active,
@@ -11377,7 +11377,7 @@ html {
 
 .sidebar-nav > .sidebar-brand {
   font-size: 1.2rem;
-  background: rgba(52, 58, 64, 0.1);
+  background: /*rgba(0, 105, 209, 1);*/rgba(52, 58, 64, 0.1);
   height: 80px;
   line-height: 50px;
   padding-top: 15px;
@@ -11454,7 +11454,7 @@ footer.footer .social-link {
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
 }
 footer.footer .social-link:hover {
-  background-color: #61457A;
+  background-color: #0069d1;
   text-decoration: none;
 }
 
@@ -11586,7 +11586,7 @@ footer.footer .social-link:hover {
             clip-path: inset(2rem);
   }
   .portfolio-item:hover .caption {
-    background-color: rgba(29, 128, 159, 0.9);
+    background-color: rgba(0, 105, 209, 0.9);
     -webkit-clip-path: inset(2rem);
             clip-path: inset(2rem);
   }
