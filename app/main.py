@@ -130,8 +130,17 @@ def liberal_response(input):
 
 
 
+def text_clean (text):
+    import random
+    string_list=['Hmmm....','Depends.','Let us agree to disagree.','Its all a conspiracy','Interesting....']
+    if text.strip()=='':
+        return random.choice(string_list)
+    else :
+        return text.capitalize()
 
 @app.route(f'{base_url}/generate_text/', methods=["POST"])
+
+
 
 def generate_text():
     prompt = request.form['prompt']
@@ -140,20 +149,20 @@ def generate_text():
     #responses=""
     if opinion == 'liberal':
         x = generate_text_lib(prompt)
-        result.append('<font color="#00AEF3">Liberal : '+x+'</font><br><br>')
+        result.append('<font color="#00AEF3">Liberal : '+text_clean(x)+'</font><br><br>')
         for i in range(2):
             z = conservative_response(x)
-            result.append('<font color="#E81B23">Conservative : '+z+'</font><br><br>')
+            result.append('<font color="#E81B23">Conservative : '+text_clean(z)+'</font><br><br>')
             x = liberal_response(z)
-            result.append('<font color="#00AEF3">Liberal : '+x+'</font><br><br>')
+            result.append('<font color="#00AEF3">Liberal : '+text_clean(x)+'</font><br><br>')
     elif opinion == 'conservative':
         z = generate_text_cons(prompt)
-        result.append('<font color="#E81B23">Conservative : '+z+'</font><br><br>')
+        result.append('<font color="#E81B23">Conservative : '+text_clean(z)+'</font><br><br>')
         for i in range(2):
             x = liberal_response(z)
-            result.append('<font color="#00AEF3">Liberal : '+x+'</font><br><br>')
+            result.append('<font color="#00AEF3">Liberal : '+text_clean(x)+'</font><br><br>')
             z = conservative_response(x)
-            result.append('<font color="#E81B23">Conservative : '+z+'</font><br><br>')
+            result.append('<font color="#E81B23">Conservative : '+text_clean(z)+'</font><br><br>')
     #reponses = "".join(str(x) for x in responses)
     responses =" ".join(result)
     session['data'] = responses
