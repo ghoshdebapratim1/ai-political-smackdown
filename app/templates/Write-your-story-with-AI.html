@@ -54,12 +54,13 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-5">
                         <h2 class="text-light">Test out our model here!</h2>
-                        <p class="lead mb-5"><strong>Submit a prompt for our bots to work with below, and the results will appear on the right!</strong></p>
+                        <p class="lead mb-5 text-light"><strong>Pick Liberal or Conservative and  Submit a prompt for our bots to work with below, and the results will appear on the right! </strong></p>
                                                
                        
                       
                         <form action="{{url_for('generate_text')}}" method="POST" source="custom" name="form-1" >
                           <div class="form-group">
+                            <label for="opinion" class="text-light">Choose a side!!</label>
                             <select name="opinion" id="opinion">
                                 <option value="liberal">Liberal</option>
                                 <option value="conservative">Conservative</option>

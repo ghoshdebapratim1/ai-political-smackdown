@@ -11506,7 +11506,7 @@ footer.footer .social-link:hover {
   background: url("../img/CheatSheet.png") no-repeat center center;;
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 75%;
 }
 .cheatsheet h1, .cheatsheet .h1 {
   font-size: 4rem;
