@@ -140,20 +140,20 @@ def generate_text():
     #responses=""
     if opinion == 'liberal':
         x = generate_text_lib(prompt)
-        result.append('Liberal : '+x+'<br><br>')
+        result.append('<font color="#00AEF3">Liberal : '+x+'</font><br><br>')
         for i in range(2):
             z = conservative_response(x)
-            result.append('Conservative : '+z+'<br><br>')
+            result.append('<font color="#E81B23">Conservative : '+z+'</font><br><br>')
             x = liberal_response(z)
-            result.append('Liberal : '+x+'<br><br>')
+            result.append('<font color="#00AEF3">Liberal : '+x+'</font><br><br>')
     elif opinion == 'conservative':
         z = generate_text_cons(prompt)
-        result.append('Conservative : '+z+'<br><br>')
+        result.append('<font color="#E81B23">Conservative : '+z+'</font><br><br>')
         for i in range(2):
             x = liberal_response(z)
-            result.append('Liberal : '+x+'<br><br>')
+            result.append('<font color="#00AEF3">Liberal : '+x+'</font><br><br>')
             z = conservative_response(x)
-            result.append('Conservative : '+z+'<br><br>')
+            result.append('<font color="#E81B23">Conservative : '+z+'</font><br><br>')
     #reponses = "".join(str(x) for x in responses)
     responses =" ".join(result)
     session['data'] = responses
