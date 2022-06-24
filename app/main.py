@@ -23,7 +23,7 @@ import nltk as nk
 #nk.download('punkt')
 
 # load up a model from memory. Note you may not need all of these options.
-ai_cons = aitextgen(model_folder="model_cons", to_gpu = False)
+ai_cons = aitextgen(model_folder="model_cons_v2", to_gpu = False)
 ai_lib = aitextgen(model_folder="liberal_model", to_gpu = False)
 #ai = aitextgen(model="distilgpt2", to_gpu=False)
 
